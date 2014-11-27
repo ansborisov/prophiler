@@ -256,7 +256,21 @@ body {
     max-height: 500px;
     overflow-x: hidden;
     overflow-y: auto;
-    display: none;
+  }
+
+  .opened {
+    height: auto;
+    -webkit-transition: height 0.8s;
+   	-moz-transition: height 0.8s;
+   	transition: height 0.8s;
+  }
+
+  .closed {
+    padding: 0 !important;
+    height: 0 !important;
+    -webkit-transition: height 0.8s;
+   	-moz-transition: height 0.8s;
+   	transition: height 0.8s;
   }
 
   .logs {
@@ -264,11 +278,9 @@ body {
     max-height: 500px;
     overflow-x: hidden;
     overflow-y: auto;
-    display: none;
   }
 
   .datacollector {
-    display: none;
     padding: 20px;
     max-height: 500px;
     overflow-x: hidden;

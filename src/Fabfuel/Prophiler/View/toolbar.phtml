@@ -6,6 +6,27 @@
     <?php echo file_get_contents(__DIR__ . '/css/screen.css'); ?>
 </style>
 
+<script>
+
+    var slide = function (containerId) {
+
+        var container = document.getElementById(containerId),
+            classes = container.className.split(' '),
+            newClasses = [];
+
+        classes.forEach(function (className) {
+            if (className == 'closed') {
+                newClasses.push('opened');
+            } else if (className == 'opened') {
+                newClasses.push('closed');
+            } else {
+                newClasses.push(className);
+            }
+        });
+        container.className = newClasses.join(' ');
+    };
+
+</script>
 <div id="prophiler">
 
     <div class="toolbar">
@@ -20,26 +41,26 @@
                     <span class="label color-1"><span class="glyphicon glyphicon-tasks"></span> <?php printf('%.3f MB', memory_get_peak_usage() / 1024 / 1024) ?></span>
                 </li>
                 <li>
-                    <a href="#" onclick="return $('#prophiler-benchmarks').slideToggle('fast');"><span class="label color-5"><span class="glyphicon glyphicon-dashboard"></span> Timeline</span></a>
+                    <a href="#" onclick="slide('prophiler-benchmarks');"><span class="label color-5"><span class="glyphicon glyphicon-dashboard"></span> Timeline</span></a>
                 </li>
                 <li>
-                    <a href="#" onclick="return $('#prophiler-logs').slideToggle('fast');"><span class="label color-5"><span class="glyphicon glyphicon-align-left"></span> Logs</span></a>
+                    <a href="#" onclick="slide('prophiler-logs');"><span class="label color-5"><span class="glyphicon glyphicon-align-left"></span> Logs</span></a>
                 </li>
 
                 <?php foreach ($dataCollectors as $dataCollector): ?>
                     <li>
-                        <a href="#" onclick="return $('#prophiler-datacollector-<?= md5($dataCollector->getTitle()) ?>').slideToggle('fast');"><span class="label color-5"><span class="glyphicon glyphicon-<?= $dataCollector->getIcon() ?>"></span> <?= $dataCollector->getTitle() ?></span></a>
+                        <a href="#" onclick="slide('prophiler-datacollector-<?= md5($dataCollector->getTitle()) ?>');"><span class="label color-5"><span class="glyphicon glyphicon-<?= $dataCollector->getIcon() ?>"></span> <?= $dataCollector->getTitle() ?></span></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
         </nav>
     </div>
 
-    <div id="prophiler-benchmarks" class="benchmarks">
+    <div id="prophiler-benchmarks" class="benchmarks closed">
         <?php $this->partial('partials/benchmarks', ['profiler' => $profiler]); ?>
     </div>
 
-    <div id="prophiler-logs" class="logs">
+    <div id="prophiler-logs" class="logs closed">
         <?php $this->partial('partials/logs', ['profiler' => $profiler]); ?>
     </div>
 
