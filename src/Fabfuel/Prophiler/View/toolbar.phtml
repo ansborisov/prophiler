@@ -70,9 +70,6 @@
 </div>
 
 <script>
-	if (!window.jQuery) {
-		document.write('<script src="//code.jquery.com/jquery-2.1.1.min.js"><\/script>');
-	}
     window.addEventListener("load", function () {
         $('json').each(function (index, el) {
             el.innerHTML = JSON.stringify(JSON.parse(el.innerHTML), null, '    ');
